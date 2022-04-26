@@ -1,0 +1,33 @@
+{% load static %}
+
+<header class="header">
+    <div class="container container--narrow">
+        <a href="/" class="header__logo">
+            <h6 style="color:white;">BURACZEK & CEBULKA</h6>
+            {% comment %} <img src="images/logo4.png" alt="buiceb Logo" /> {% endcomment %}
+        </a>
+        <nav class="header__nav">
+            <input type="checkbox" id="responsive-menu" />
+            <label for="responsive-menu" class="toggle-menu">
+                <span>Menu</span>
+                <div class="toggle-menu__lines"></div>
+            </label>
+            <ul class="header__menu">
+                <li class="header__menuItem"><a href="{% url 'cooks' %}">Cooks</a></li>
+                <li class="header__menuItem"><a href="{% url 'recipes' %}">Recipes</a></li>
+                <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox</a></li>
+
+                {% if user.is_authenticated %}
+                <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
+                <li class="header__menuItem"><a href="{% url 'add-recipe' %}">Add Recipy</a></li>
+                <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub">Logout</a>
+                </li>
+                {% else %}
+
+                <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub">Login/Sign Up</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </div>
+</header>

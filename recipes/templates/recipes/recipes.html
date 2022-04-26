@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+
+
+
+{% block content %}
+<!-- Main Section -->
+<main class="recipes">
+    <section class="hero-section text-center">
+        <div class="container container--narrow">
+            <div class="hero-section__box">
+                <h2>Search for <span>recipes</span></h2>
+            </div>
+
+            <div class="hero-section__search">
+                <form class="form" action="#" method="get">
+                    <div class="form__field">
+                        <label for="formInput#search">Search By Recipes </label>
+                        <input class="input input--text" id="formInput#search" type="text" name="text"
+                            placeholder="Search by Recipe Name" />
+                    </div>
+
+                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="recipesList">
+        <div class="container">
+            <div class="grid grid--three">
+
+                {% for recipe in recipes %}
+                <div class="column">
+                    <div class="card recipe">
+                        <a href="{% url 'recipe' recipe.id %}" class="recipe">
+                            <img class="recipe__thumbnail" src="{{recipe.image.url}}" alt="recipe thumbnail" />
+                            <div class="card__body">
+                                <h3 class="recipe__title">{{recipe.title|slice:"20"}}</h3>
+                                <p><a class="recipe__author" href="{% url 'cook' recipe.owner.id %}">By
+                                        {{recipe.owner}}</a></p>
+                                <p class="recipe--rating">
+                                    <span style="font-weight: bold;">98%</span> Postitive
+                                    Feedback (72 Votes)
+                                </p>
+                                <div class="recipe__tags">
+                                    {% for tag  in recipe.tags.all %}
+                                    <span class="tag tag--pill tag--sub tag--lg">
+                                        <small>{{tag.name}}</small>
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </section>
+
+    <div class="pagination">
+        <ul class="container">
+            <li><a href="#" class="btn btn--disabled">&#10094; Prev</a></li>
+            <li><a href="#" class="btn btn--sub">01</a></li>
+            <li><a href="#" class="btn">02</a></li>
+            <li><a href="#" class="btn">03</a></li>
+            <li><a href="#" class="btn">04</a></li>
+            <li><a href="#" class="btn">05</a></li>
+            <li><a href="#" class="btn">06</a></li>
+            <li><a href="#" class="btn">07</a></li>
+            <li><a href="#" class="btn">08</a></li>
+            <li><a href="#" class="btn">09</a></li>
+            <li><a href="#" class="btn">10</a></li>
+            <li><a href="#" class="btn">Next &#10095;</a></li>
+        </ul>
+    </div>
+</main>
+{% endblock content %}
